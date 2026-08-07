@@ -83,30 +83,29 @@ export const EXAMPLES: Example[] = [
   },
 ];
 
-/* Kept under ~56 columns so both panes read without horizontal scrolling. */
-export const HTML_SNIPPET = `<div class="flex flex-col gap-4 rounded-3xl
-            bg-slate-950 p-6 shadow-2xl">
+/* Every class string stays on one line in both panes. Splitting a Dart string
+   across lines needs adjacent-literal concatenation, and that plumbing reads as
+   noise next to the markup it is supposed to mirror — so the panes are sized to
+   fit these instead of the strings being broken to fit the panes. */
+export const HTML_SNIPPET = `<div class="flex flex-col gap-4 rounded-3xl bg-slate-950 p-6">
   <p class="text-sm text-slate-400">Northstar</p>
-  <h2 class="text-3xl font-bold text-white">Atlas</h2>
+  <h2 class="text-3xl font-bold text-white md:text-4xl">Atlas</h2>
 
-  <button class="rounded-full bg-indigo-500 px-5 py-2.5
-                 text-sm font-semibold text-white
-                 hover:bg-indigo-400">
-    Deploy
+  <button
+    class="rounded-full bg-indigo-500 px-5 py-2 hover:bg-indigo-400"
+  >
+    <span class="text-sm font-semibold text-white">Deploy</span>
   </button>
 </div>`;
 
 /* The functional API: lowercase helpers that read like the markup above. */
-export const DART_SNIPPET = `div('flex flex-col gap-4 rounded-3xl '
-    'bg-slate-950 p-6 shadow-2xl', [
+export const DART_SNIPPET = `div('flex flex-col gap-4 rounded-3xl bg-slate-950 p-6', [
   p('text-sm text-slate-400', 'Northstar'),
-  h2('text-3xl font-bold text-white', 'Atlas'),
+  h2('text-3xl font-bold text-white md:text-4xl', 'Atlas'),
 
   button(
-    'rounded-full bg-indigo-500 px-5 py-2.5 '
-    'text-sm font-semibold text-white '
-    'hover:bg-indigo-400',
-    [p('text-white', 'Deploy')],
+    'rounded-full bg-indigo-500 px-5 py-2 hover:bg-indigo-400',
+    [span('text-sm font-semibold text-white', 'Deploy')],
     onPressed: deploy,
   ),
 ])`;

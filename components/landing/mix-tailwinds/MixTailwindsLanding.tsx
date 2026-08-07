@@ -207,7 +207,7 @@ export function MixTailwindsLanding() {
           </motion.div>
         </section>
 
-        <section className="mtw-section">
+        <section className="mtw-section mtw-section-wide">
           <SectionHead
             eyebrow="The API"
             title="If you can write the markup, you can write the widget"

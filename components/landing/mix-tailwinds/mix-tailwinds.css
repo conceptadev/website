@@ -283,6 +283,12 @@
   padding-block: clamp(3rem, 6vw, 4.5rem);
 }
 
+/* The code section runs wider than the reading shell so both panes can hold a
+   full class string on one line — the class string is what it is showing. */
+.mtw-section-wide {
+  width: min(1320px, 100% - 2.5rem);
+}
+
 /* ---------- example gallery ---------- */
 
 .mtw-gallery {
@@ -456,6 +462,10 @@
   overflow-x: auto;
   font-family: var(--mtw-mono);
 }
+
+/* HighlightedCode pins the code size with an important utility inside a
+   cascade layer, which outranks an unlayered override no matter its
+   specificity. The snippets are written to fit 14px instead. */
 
 .mtw-panes-seam {
   display: grid;
