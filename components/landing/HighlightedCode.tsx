@@ -10,7 +10,7 @@ function getHighlighter(): Promise<Highlighter> {
     highlighterPromise = import("shiki").then((shiki) =>
       shiki.createHighlighter({
         themes: ["github-dark"],
-        langs: ["bash", "json", "typescript"],
+        langs: ["bash", "json", "typescript", "html", "dart"],
       })
     );
   }
@@ -19,7 +19,7 @@ function getHighlighter(): Promise<Highlighter> {
 
 interface HighlightedCodeProps {
   code: string;
-  lang?: "bash" | "json" | "typescript";
+  lang?: "bash" | "json" | "typescript" | "html" | "dart";
   className?: string;
 }
 
