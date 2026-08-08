@@ -43,6 +43,45 @@ test('sells the package instead of reporting a pixel diff', () => {
   assert.doesNotMatch(pageSource, /% of pixels/)
 })
 
+test('makes every gallery example a clean browser-to-Flutter comparison', () => {
+  const landing = read('components/landing/mix-tailwinds/MixTailwindsLanding.tsx')
+  const content = read('components/landing/mix-tailwinds/content.ts')
+  const styles = read('components/landing/mix-tailwinds/mix-tailwinds.css')
+
+  assert.match(
+    landing,
+    /<ComparisonSeam\s+key=\{active\.slug\}\s+example=\{active\}\s*\/>/s,
+  )
+  assert.doesNotMatch(landing, /Root element|ClassSpecimen|mtw-shot|mtw-gallery-meta/)
+  assert.doesNotMatch(
+    landing,
+    /mtw-hero-stage|mtw-hero-hint|<ComparisonSeam example=\{EXAMPLES\[0\]\}/,
+  )
+  assert.doesNotMatch(content, /\b(?:eyebrow|blurb|classNames):/)
+
+  // The comparison evidence keeps its 16px diagnostic capture margin. The
+  // landing crops that matte instead of creating presentation-only variants.
+  assert.match(styles, /--mtw-capture-width: 103\.278689%/)
+  assert.match(styles, /--mtw-capture-width: 107\.407408%/)
+  assert.match(styles, /max-width: none/)
+  assert.match(styles, /border-radius: clamp\(1\.25rem, 2\.5vw, 1\.75rem\)/)
+  assert.match(styles, /border-radius: clamp\(1\.125rem, 5\.25vw, 2\.375rem\)/)
+  assert.match(content, /ratio: "976 \/ 476"/)
+  assert.match(content, /ratioSm: "432 \/ 786"/)
+  assert.doesNotMatch(styles, /\.mtw-shot\b/)
+})
+
+test('connects the example tabs to one keyboard-operable comparison panel', () => {
+  const landing = read('components/landing/mix-tailwinds/MixTailwindsLanding.tsx')
+
+  assert.match(landing, /aria-controls=\{examplePanelId\(example\.slug\)\}/)
+  assert.match(landing, /tabIndex=\{example\.slug === activeSlug \? 0 : -1\}/)
+  assert.match(landing, /onKeyDown=\{\(event\) => handleExampleKeyDown\(event, index\)\}/)
+  assert.match(landing, /role="tabpanel"/)
+  assert.match(landing, /aria-labelledby=\{exampleTabId\(example\.slug\)\}/)
+  assert.match(landing, /hidden=\{example\.slug !== activeSlug\}/)
+})
+
 test('shows the functional API with real HTML and Dart highlighting', () => {
   const content = read('components/landing/mix-tailwinds/content.ts')
   const landing = read('components/landing/mix-tailwinds/MixTailwindsLanding.tsx')

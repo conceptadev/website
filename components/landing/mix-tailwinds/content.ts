@@ -4,19 +4,16 @@
    comparison suite: each example is rendered once in a real browser on
    Tailwind 4.3.1 and once in Flutter, from the same class string. Regenerate
    them with `npm run compare:advanced` in packages/mix_tailwinds/tool/
-   visual-comparison and copy the per-example captures across. */
-
-export const TAILWIND_VERSION = "4.3.1";
+   visual-comparison and copy the per-example captures across. The suite keeps
+   a 16px diagnostic margin around every capture; the landing crops that margin
+   at presentation time while preserving the source evidence. */
 
 export type Example = {
   slug: string;
   title: string;
-  eyebrow: string;
-  blurb: string;
-  classNames: string;
-  /** Intrinsic ratio of the 1024px captures, so frames never reflow. */
+  /** Ratio of the visible desktop capture after cropping its 16px margin. */
   ratio: string;
-  /** Ratio of the 480px captures, which lay out taller and narrower. */
+  /** Ratio of the visible phone capture after cropping its 16px margin. */
   ratioSm: string;
 };
 
@@ -29,57 +26,32 @@ export const EXAMPLES: Example[] = [
   {
     slug: "launch-command",
     title: "Launch command",
-    eyebrow: "Release control",
-    blurb:
-      "Status, metrics, live progress, and two interaction states on a dark surface.",
-    classNames:
-      "flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-slate-950 shadow-2xl",
-    ratio: "1008 / 508",
-    ratioSm: "464 / 818",
+    ratio: "976 / 476",
+    ratioSm: "432 / 786",
   },
   {
     slug: "signal-analytics",
     title: "Signal analytics",
-    eyebrow: "Acquisition",
-    blurb:
-      "A dense analytics card: fractional bars, tight type, hairline borders.",
-    classNames:
-      "flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl",
-    ratio: "1008 / 602",
-    ratioSm: "464 / 1039",
+    ratio: "976 / 570",
+    ratioSm: "432 / 1007",
   },
   {
     slug: "incident-room",
     title: "Incident room",
-    eyebrow: "Active incident",
-    blurb:
-      "An operational timeline with severity colors, avatars, and real actions.",
-    classNames:
-      "flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-amber-200 bg-amber-50 shadow-xl",
-    ratio: "1008 / 659",
-    ratioSm: "464 / 1027",
+    ratio: "976 / 627",
+    ratioSm: "432 / 995",
   },
   {
     slug: "release-timeline",
     title: "Release timeline",
-    eyebrow: "Launch orbit",
-    blurb:
-      "Four stages across a multi-stop gradient, with nested type and borders.",
-    classNames:
-      "flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-linear-to-br from-indigo-950 via-blue-950 to-slate-950 shadow-2xl",
-    ratio: "1008 / 520",
-    ratioSm: "464 / 1148",
+    ratio: "976 / 488",
+    ratioSm: "432 / 1116",
   },
   {
     slug: "capacity-map",
     title: "Capacity map",
-    eyebrow: "Sprint 42",
-    blurb:
-      "Portfolio allocation: responsive sections, gradients, compact team cards.",
-    classNames:
-      "flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl",
-    ratio: "1008 / 627",
-    ratioSm: "464 / 1020",
+    ratio: "976 / 595",
+    ratioSm: "432 / 988",
   },
 ];
 

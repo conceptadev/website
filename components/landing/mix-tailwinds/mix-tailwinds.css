@@ -51,7 +51,7 @@
 .mtw-hero {
   width: var(--mtw-shell);
   margin-inline: auto;
-  padding-block: clamp(4.5rem, 11vw, 7.5rem) clamp(2.5rem, 5vw, 4rem);
+  padding-block: clamp(4.5rem, 11vw, 7.5rem) clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .mtw-hero-copy {
@@ -138,16 +138,18 @@
 
 /* ---------- seam ---------- */
 
-.mtw-hero-stage {
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-}
-
+/* The comparison suite leaves 16px around each capture. Enlarge the source
+   from its visible 976px width to 1008px so the frame crops that margin. */
 .mtw-seam {
+  --mtw-capture-width: 103.278689%;
+
   position: relative;
   margin: 0;
   aspect-ratio: var(--mtw-ratio);
   border: 1px solid var(--lp-border-card);
-  border-radius: 1rem;
+  /* Match the scaled rounded-3xl capture corner so its white canvas cannot
+     show between the component and the frame's clipping edge. */
+  border-radius: clamp(1.25rem, 2.5vw, 1.75rem);
   overflow: hidden;
   background: var(--lp-surface);
   box-shadow: 0 32px 80px -32px var(--lp-accent-glow);
@@ -162,11 +164,12 @@
 
 .mtw-seam-layer {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  top: 50%;
+  left: 50%;
+  width: var(--mtw-capture-width);
+  max-width: none;
+  height: auto;
+  translate: -50% -50%;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -268,13 +271,6 @@
   outline-offset: 3px;
 }
 
-.mtw-hero-hint {
-  margin: 1rem 0 0;
-  font-family: var(--mtw-mono);
-  font-size: 0.8125rem;
-  color: var(--lp-text-muted);
-}
-
 /* ---------- sections ---------- */
 
 .mtw-section {
@@ -328,94 +324,6 @@
 .mtw-picker-tab:focus-visible {
   outline: 2px solid var(--lp-accent);
   outline-offset: 2px;
-}
-
-.mtw-gallery-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-  gap: 1.5rem;
-  align-items: start;
-}
-
-.mtw-shot {
-  margin: 0;
-  border: 1px solid var(--lp-border-card);
-  border-radius: 1rem;
-  overflow: hidden;
-  background: var(--lp-surface);
-  box-shadow: 0 32px 80px -40px var(--lp-accent-glow);
-}
-
-.mtw-shot img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: var(--mtw-ratio);
-  object-fit: cover;
-  object-position: top center;
-}
-
-.mtw-gallery-meta {
-  padding-top: 0.25rem;
-}
-
-.mtw-gallery-eyebrow {
-  margin: 0;
-  font-family: var(--mtw-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--lp-accent);
-}
-
-.mtw-gallery-title {
-  margin: 0.5rem 0 0;
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--lp-text-main);
-}
-
-.mtw-gallery-blurb {
-  margin: 0.625rem 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: var(--lp-text-muted);
-}
-
-.mtw-gallery-label {
-  margin: 1.75rem 0 0.5rem;
-  font-family: var(--mtw-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--lp-text-muted);
-}
-
-.mtw-specimen {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3125rem;
-  padding: 0.875rem 1rem;
-  border: 1px solid var(--lp-border-card);
-  border-left: 2px solid var(--lp-accent);
-  border-radius: 0.75rem;
-  background: var(--mtw-panel);
-  font-family: var(--mtw-mono);
-  font-size: 0.78125rem;
-  line-height: 1.5;
-}
-
-.mtw-specimen-token {
-  white-space: nowrap;
-}
-
-.mtw-specimen-root {
-  color: #cfcbe6;
-}
-
-.mtw-specimen-value {
-  color: var(--lp-accent);
 }
 
 /* ---------- code panes ---------- */
@@ -563,10 +471,6 @@
 /* ---------- responsive ---------- */
 
 @media (max-width: 900px) {
-  .mtw-gallery-body {
-    grid-template-columns: 1fr;
-  }
-
   .mtw-panes {
     grid-template-columns: 1fr;
   }
@@ -582,14 +486,13 @@
 }
 
 /* Matches NARROW_CAPTURE_QUERY: below this the phone-width captures load, and
-   they are taller than the desktop ones. */
+   they are taller than the desktop ones. The same crop is 464px over 432px. */
 @media (max-width: 720px) {
   .mtw-seam {
-    aspect-ratio: var(--mtw-ratio-sm);
-  }
+    --mtw-capture-width: 107.407408%;
 
-  .mtw-shot img {
-    aspect-ratio: var(--mtw-ratio-sm) !important;
+    aspect-ratio: var(--mtw-ratio-sm);
+    border-radius: clamp(1.125rem, 5.25vw, 2.375rem);
   }
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import type { CSSProperties } from "react";
+import { useRef, useState } from "react";
+import type { KeyboardEvent } from "react";
 import { motion, MotionConfig } from "framer-motion";
 import { HighlightedCode } from "../HighlightedCode";
 import { LandingButton } from "../LandingButton";
@@ -15,8 +15,6 @@ import {
   FEATURES,
   HTML_SNIPPET,
   INSTALL_SNIPPET,
-  NARROW_CAPTURE_QUERY,
-  TAILWIND_VERSION,
 } from "./content";
 import "../landing.css";
 import "./mix-tailwinds.css";
@@ -25,36 +23,8 @@ const PUB_DEV_URL = "https://pub.dev/packages/mix_tailwinds";
 const GITHUB_URL =
   "https://github.com/btwld/mix/tree/main/packages/mix_tailwinds";
 
-/* The class string is the product, so it gets typeset rather than printed:
-   utility roots stay quiet, values carry the accent, and the whole thing keeps
-   the monospace grid a Tailwind user already reads by shape. */
-function ClassSpecimen({ value }: { value: string }) {
-  return (
-    <code className="mtw-specimen">
-      {value.split(" ").map((token, index) => {
-        const split = token.lastIndexOf("-");
-        const hasValue =
-          split > 0 && /^[\d[]|\d|\/|^(?:full|auto|none)$/.test(token.slice(split + 1));
-        return (
-          <span className="mtw-specimen-token" key={`${token}-${index}`}>
-            {hasValue ? (
-              <>
-                <span className="mtw-specimen-root">
-                  {token.slice(0, split)}
-                </span>
-                <span className="mtw-specimen-value">
-                  -{token.slice(split + 1)}
-                </span>
-              </>
-            ) : (
-              <span className="mtw-specimen-root">{token}</span>
-            )}
-          </span>
-        );
-      })}
-    </code>
-  );
-}
+const exampleTabId = (slug: string) => `mtw-example-tab-${slug}`;
+const examplePanelId = (slug: string) => `mtw-example-panel-${slug}`;
 
 function CodePane({
   language,
@@ -80,7 +50,37 @@ function CodePane({
 
 export function MixTailwindsLanding() {
   const [activeSlug, setActiveSlug] = useState(EXAMPLES[0].slug);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const active = EXAMPLES.find((e) => e.slug === activeSlug) ?? EXAMPLES[0];
+
+  const handleExampleKeyDown = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    let nextIndex: number;
+
+    switch (event.key) {
+      case "ArrowRight":
+        nextIndex = (index + 1) % EXAMPLES.length;
+        break;
+      case "ArrowLeft":
+        nextIndex = (index - 1 + EXAMPLES.length) % EXAMPLES.length;
+        break;
+      case "Home":
+        nextIndex = 0;
+        break;
+      case "End":
+        nextIndex = EXAMPLES.length - 1;
+        break;
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    const nextExample = EXAMPLES[nextIndex];
+    setActiveSlug(nextExample.slug);
+    tabRefs.current[nextIndex]?.focus();
+  };
 
   return (
     <MotionConfig reducedMotion="user">
@@ -107,8 +107,7 @@ export function MixTailwindsLanding() {
 
             <motion.p className="mtw-lead" variants={fadeUp} custom={0.1}>
               Write the utilities you already know and get real Flutter widgets
-              — not a webview, not a screenshot. Same class string, same result,
-              on both sides of the seam below.
+              — not a webview, not a screenshot.
             </motion.p>
 
             <motion.div className="mtw-cta-row" variants={fadeUp} custom={0.15}>
@@ -132,19 +131,6 @@ export function MixTailwindsLanding() {
               />
             </motion.div>
           </motion.div>
-
-          <motion.div
-            className="mtw-hero-stage"
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <ComparisonSeam example={EXAMPLES[0]} />
-            <p className="mtw-hero-hint">
-              Drag the seam. The left half is a browser on Tailwind{" "}
-              {TAILWIND_VERSION}; the right half is Flutter.
-            </p>
-          </motion.div>
         </section>
 
         <section className="mtw-section" id="examples">
@@ -155,55 +141,46 @@ export function MixTailwindsLanding() {
                 Real components, <span className="mtw-accent">no CSS</span>
               </>
             }
-            lead="Every one of these is a Flutter widget tree described entirely in Tailwind utilities. Pick one to see it, and the exact string that produced it."
+            lead="Every example uses the same class string in Tailwind and Flutter. Pick one, then drag the seam to compare both renderings."
           />
 
           <motion.div className="mtw-gallery" {...reveal}>
             <div className="mtw-picker" role="tablist" aria-label="Example">
-              {EXAMPLES.map((example) => (
+              {EXAMPLES.map((example, index) => (
                 <button
                   key={example.slug}
+                  ref={(node) => {
+                    tabRefs.current[index] = node;
+                  }}
+                  id={exampleTabId(example.slug)}
                   role="tab"
                   type="button"
+                  aria-controls={examplePanelId(example.slug)}
                   aria-selected={example.slug === activeSlug}
+                  tabIndex={example.slug === activeSlug ? 0 : -1}
                   className="mtw-picker-tab"
                   onClick={() => setActiveSlug(example.slug)}
+                  onKeyDown={(event) => handleExampleKeyDown(event, index)}
                 >
                   {example.title}
                 </button>
               ))}
             </div>
 
-            <div className="mtw-gallery-body">
-              <figure
-                className="mtw-shot"
-                style={
-                  {
-                    "--mtw-ratio": active.ratio,
-                    "--mtw-ratio-sm": active.ratioSm,
-                  } as CSSProperties
-                }
+            {EXAMPLES.map((example) => (
+              <div
+                key={example.slug}
+                className="mtw-gallery-body"
+                id={examplePanelId(example.slug)}
+                role="tabpanel"
+                aria-labelledby={exampleTabId(example.slug)}
+                hidden={example.slug !== activeSlug}
               >
-                <picture key={active.slug}>
-                  <source
-                    media={NARROW_CAPTURE_QUERY}
-                    srcSet={`/mix-tailwinds/${active.slug}-flutter-sm.png`}
-                  />
-                  <img
-                    src={`/mix-tailwinds/${active.slug}-flutter.png`}
-                    alt={`${active.title} rendered by Flutter with mix_tailwinds`}
-                  />
-                </picture>
-              </figure>
-
-              <div className="mtw-gallery-meta">
-                <p className="mtw-gallery-eyebrow">{active.eyebrow}</p>
-                <h3 className="mtw-gallery-title">{active.title}</h3>
-                <p className="mtw-gallery-blurb">{active.blurb}</p>
-                <p className="mtw-gallery-label">Root element</p>
-                <ClassSpecimen value={active.classNames} />
+                {example.slug === activeSlug ? (
+                  <ComparisonSeam key={active.slug} example={active} />
+                ) : null}
               </div>
-            </div>
+            ))}
           </motion.div>
         </section>
 
