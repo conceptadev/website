@@ -12,7 +12,7 @@ The `lib/` layout mirrors the documentation site. When a doc section has multipl
 - **`lib/guides/`** – Styling, directives, design tokens, dynamic styling (variants), animations, gradients. Multi-file sections use subfolders: `animations/`, `design_token/`, `directives/`, `dynamic_styling/`, `gradients/`.
 - **`lib/widgets/`** – Box, text, icon, image, flexbox, stack, vbox, pressable, stylewidgets. Multi-file sections use subfolders: `box/`, `text/`, `icon/`, `image/`, `flexbox/`, `stack/`, `vbox/`.
 - **`lib/tutorials/`** – Creating context variants, theming, creating a widget (e.g. `creating_a_widget/design_system_button.dart`), controlling widget state.
-- **`lib/ecosystem/`** – Ecosystem demos (e.g. `mix_tailwinds.dart`).
+- **`lib/ecosystem/`** – Ecosystem demos (e.g. `mix_winds.dart`).
 - **`lib/components/`** – Shared UI (chip button, scaffold, tokens).
 - **`lib/preview_registry.dart`** – Single source of truth for preview IDs and metadata.
 - **`tool/generate_previews_manifest.dart`** – Generates `previews-manifest.json` from the registry for the website.

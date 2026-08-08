@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'ecosystem/mix_tailwinds.dart' as tw_card_alert;
+import 'ecosystem/mix_winds.dart' as tw_card_alert;
 import 'guides/animations/implicit_curved_scale.dart' as auto_scale;
 import 'guides/animations/implicit_spring_translate.dart' as spring_anim;
 import 'guides/animations/implicit_state_counter.dart'
@@ -544,8 +544,8 @@ class PreviewRegistry {
     ),
     // ecosystem
     PreviewEntry(
-      previewId: 'ecosystem/mix-tailwinds.0',
-      sourcePath: 'packages/mix_docs_preview/lib/ecosystem/mix_tailwinds.dart',
+      previewId: 'ecosystem/mix-winds.0',
+      sourcePath: 'packages/mix_docs_preview/lib/ecosystem/mix_winds.dart',
       category: _ecosystem,
       builder: (_) => const tw_card_alert.Example(),
       snippetRegion: 'example',

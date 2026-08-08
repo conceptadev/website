@@ -226,7 +226,7 @@ const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
         {
             label: 'Ecosystem',
             pages: [
-                { label: 'mix_tailwinds', href: '/documentation/mix/ecosystem/mix-tailwinds' },
+                { label: 'mix_winds', href: '/documentation/mix/ecosystem/mix-winds' },
                 { label: 'mix_schema', href: '/documentation/mix/ecosystem/mix-schema' },
                 { label: 'mix_lint', href: '/documentation/mix/ecosystem/mix-lint' },
                 { label: 'mix_generator', href: '/documentation/mix/ecosystem/mix-generator' },

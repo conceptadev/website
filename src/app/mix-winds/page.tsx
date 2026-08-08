@@ -1,4 +1,4 @@
-import { MixTailwindsLanding } from "../../../components/landing/mix-tailwinds/MixTailwindsLanding";
+import { MixWindsLanding } from "../../../components/landing/mix-winds/MixWindsLanding";
 
 const description =
   "Write Tailwind utility classes, render native Flutter widgets. Every example is measured against a real browser rendering the same class string, at three viewport widths.";
@@ -8,21 +8,21 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: "mix_tailwinds — Tailwind classes. Native Flutter.",
+  title: "mix_winds — Tailwind classes. Native Flutter.",
   description,
-  applicationName: "mix_tailwinds",
+  applicationName: "mix_winds",
   openGraph: {
-    title: "mix_tailwinds — Tailwind classes, native Flutter widgets",
+    title: "mix_winds — Tailwind classes, native Flutter widgets",
     description,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "mix_tailwinds — Tailwind classes. Native Flutter.",
+    title: "mix_winds — Tailwind classes. Native Flutter.",
     description,
   },
 };
 
 export default function Page() {
-  return <MixTailwindsLanding />;
+  return <MixWindsLanding />;
 }

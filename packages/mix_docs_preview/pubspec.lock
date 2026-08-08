@@ -142,11 +142,12 @@ packages:
   mix:
     dependency: "direct main"
     description:
-      name: mix
-      sha256: ed8382ac70d5d85c3d0f753c9f8f68f61d74958afbd05f3e3d7144a11ab8efad
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
+      path: "packages/mix"
+      ref: e3133c3565e0c788b3f05f889ed75cb83f8acecb
+      resolved-ref: e3133c3565e0c788b3f05f889ed75cb83f8acecb
+      url: "https://github.com/btwld/mix.git"
+    source: git
+    version: "2.2.0-beta.2"
   mix_annotations:
     dependency: transitive
     description:
@@ -155,14 +156,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0-beta.0"
-  mix_tailwinds:
+  mix_winds:
     dependency: "direct main"
     description:
-      name: mix_tailwinds
-      sha256: "362f00e3ebf9f960c84b790faabe83f9e9e2dafaa2c6140a24954b857f820309"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1-alpha.1"
+      path: "packages/mix_winds"
+      ref: e3133c3565e0c788b3f05f889ed75cb83f8acecb
+      resolved-ref: e3133c3565e0c788b3f05f889ed75cb83f8acecb
+      url: "https://github.com/btwld/mix.git"
+    source: git
+    version: "0.1.0-alpha.0"
   naked_ui:
     dependency: transitive
     description:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mix_tailwinds/mix_tailwinds.dart';
+import 'package:mix_winds/mix_winds.dart';
 
 // #docregion example
 class Example extends StatelessWidget {

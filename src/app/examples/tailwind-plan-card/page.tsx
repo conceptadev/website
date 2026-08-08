@@ -31,7 +31,7 @@ export default function TailwindPlanCardPage() {
             Tailwind reference output
           </p>
           <h1 className="text-3xl font-semibold text-slate-800">
-            Compare with the Flutter mix_tailwinds example
+            Compare with the Flutter mix_winds example
           </h1>
         </header>
 
