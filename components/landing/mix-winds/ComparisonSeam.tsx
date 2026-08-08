@@ -5,7 +5,7 @@ import type { CSSProperties } from "react";
 import { NARROW_CAPTURE_QUERY, type Example } from "./content";
 
 /* Both halves are real captures of the same class string: a browser rendering
-   Tailwind on the left, Flutter rendering mix_tailwinds on the right. Narrow
+   Tailwind on the left, Flutter rendering mix_winds on the right. Narrow
    screens get the phone-width capture, because the desktop one shrinks past
    legibility and the comparison stops meaning anything.
 
@@ -25,11 +25,11 @@ export function ComparisonSeam({ example }: { example: Example }) {
       <picture>
         <source
           media={NARROW_CAPTURE_QUERY}
-          srcSet={`/mix-tailwinds/${example.slug}-tailwind-sm.png`}
+          srcSet={`/mix-winds/${example.slug}-tailwind-sm.png`}
         />
         <img
           className="mtw-seam-layer"
-          src={`/mix-tailwinds/${example.slug}-tailwind.png`}
+          src={`/mix-winds/${example.slug}-tailwind.png`}
           alt={`${example.title} rendered in a browser with Tailwind CSS`}
           draggable={false}
         />
@@ -38,12 +38,12 @@ export function ComparisonSeam({ example }: { example: Example }) {
       <picture className="mtw-seam-clip" style={{ clipPath: `inset(0 0 0 ${position}%)` }}>
         <source
           media={NARROW_CAPTURE_QUERY}
-          srcSet={`/mix-tailwinds/${example.slug}-flutter-sm.png`}
+          srcSet={`/mix-winds/${example.slug}-flutter-sm.png`}
         />
         <img
           className="mtw-seam-layer"
-          src={`/mix-tailwinds/${example.slug}-flutter.png`}
-          alt={`${example.title} rendered by Flutter with mix_tailwinds`}
+          src={`/mix-winds/${example.slug}-flutter.png`}
+          alt={`${example.title} rendered by Flutter with mix_winds`}
           draggable={false}
         />
       </picture>

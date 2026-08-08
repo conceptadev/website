@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   mix: ^2.1.0
-  mix_tailwinds: ^0.0.1-alpha.1
+  mix_winds: ^0.1.0-alpha.0
   remix:
     git:
       url: https://github.com/btwld/remix.git

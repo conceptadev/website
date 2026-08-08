@@ -9,12 +9,12 @@ function read(relativePath) {
   return fs.readFileSync(path.join(root, relativePath), 'utf8')
 }
 
-test('wires the mix_tailwinds page into the landing shell', () => {
-  const route = read('src/app/mix-tailwinds/page.tsx')
-  const landing = read('components/landing/mix-tailwinds/MixTailwindsLanding.tsx')
-  const styles = read('components/landing/mix-tailwinds/mix-tailwinds.css')
+test('wires the mix_winds page into the landing shell', () => {
+  const route = read('src/app/mix-winds/page.tsx')
+  const landing = read('components/landing/mix-winds/MixWindsLanding.tsx')
+  const styles = read('components/landing/mix-winds/mix-winds.css')
 
-  assert.match(route, /<MixTailwindsLanding\s*\/>/)
+  assert.match(route, /<MixWindsLanding\s*\/>/)
   assert.match(route, /Tailwind classes\. Native Flutter\./)
   assert.match(landing, /className="lp-root mtw-root"/)
   assert.match(landing, /<Aurora \/>/)
@@ -23,19 +23,19 @@ test('wires the mix_tailwinds page into the landing shell', () => {
   // inside the Mix site rather than a separate product in the navbar switcher.
   assert.match(styles, /\.mtw-root \{[^}]*--lp-accent:/s)
   const productStyles = read('components/landing/landing.css')
-  assert.doesNotMatch(productStyles, /data-product='mix-tailwinds'/)
+  assert.doesNotMatch(productStyles, /data-product='mix-winds'/)
   const layout = read('src/app/layout.jsx')
-  assert.doesNotMatch(layout, /mix-tailwinds/)
+  assert.doesNotMatch(layout, /mix-winds/)
 })
 
 test('sells the package instead of reporting a pixel diff', () => {
-  const landing = read('components/landing/mix-tailwinds/MixTailwindsLanding.tsx')
-  const content = read('components/landing/mix-tailwinds/content.ts')
-  const seam = read('components/landing/mix-tailwinds/ComparisonSeam.tsx')
+  const landing = read('components/landing/mix-winds/MixWindsLanding.tsx')
+  const content = read('components/landing/mix-winds/content.ts')
+  const seam = read('components/landing/mix-winds/ComparisonSeam.tsx')
 
   assert.match(landing, /Get started/)
   assert.match(landing, /flutter pub add|INSTALL_SNIPPET/)
-  assert.match(content, /flutter pub add mix_tailwinds/)
+  assert.match(content, /flutter pub add mix_winds/)
 
   // No parity percentages, budgets, or pass/fail language on the page.
   const pageSource = [landing, content, seam].join('\n')
@@ -44,9 +44,9 @@ test('sells the package instead of reporting a pixel diff', () => {
 })
 
 test('makes every gallery example a clean browser-to-Flutter comparison', () => {
-  const landing = read('components/landing/mix-tailwinds/MixTailwindsLanding.tsx')
-  const content = read('components/landing/mix-tailwinds/content.ts')
-  const styles = read('components/landing/mix-tailwinds/mix-tailwinds.css')
+  const landing = read('components/landing/mix-winds/MixWindsLanding.tsx')
+  const content = read('components/landing/mix-winds/content.ts')
+  const styles = read('components/landing/mix-winds/mix-winds.css')
 
   assert.match(
     landing,
@@ -72,7 +72,7 @@ test('makes every gallery example a clean browser-to-Flutter comparison', () => 
 })
 
 test('connects the example tabs to one keyboard-operable comparison panel', () => {
-  const landing = read('components/landing/mix-tailwinds/MixTailwindsLanding.tsx')
+  const landing = read('components/landing/mix-winds/MixWindsLanding.tsx')
 
   assert.match(landing, /aria-controls=\{examplePanelId\(example\.slug\)\}/)
   assert.match(landing, /tabIndex=\{example\.slug === activeSlug \? 0 : -1\}/)
@@ -83,8 +83,8 @@ test('connects the example tabs to one keyboard-operable comparison panel', () =
 })
 
 test('shows the functional API with real HTML and Dart highlighting', () => {
-  const content = read('components/landing/mix-tailwinds/content.ts')
-  const landing = read('components/landing/mix-tailwinds/MixTailwindsLanding.tsx')
+  const content = read('components/landing/mix-winds/content.ts')
+  const landing = read('components/landing/mix-winds/MixWindsLanding.tsx')
   const highlighter = read('components/landing/HighlightedCode.tsx')
 
   // Functional helpers, not the class-based widget constructors.
@@ -102,9 +102,9 @@ test('shows the functional API with real HTML and Dart highlighting', () => {
 })
 
 test('serves a legible capture on narrow screens', () => {
-  const content = read('components/landing/mix-tailwinds/content.ts')
-  const seam = read('components/landing/mix-tailwinds/ComparisonSeam.tsx')
-  const styles = read('components/landing/mix-tailwinds/mix-tailwinds.css')
+  const content = read('components/landing/mix-winds/content.ts')
+  const seam = read('components/landing/mix-winds/ComparisonSeam.tsx')
+  const styles = read('components/landing/mix-winds/mix-winds.css')
 
   assert.match(content, /NARROW_CAPTURE_QUERY = "\(max-width: 720px\)"/)
   assert.match(seam, /<source\s+media=\{NARROW_CAPTURE_QUERY\}/s)
@@ -124,7 +124,7 @@ test('serves a legible capture on narrow screens', () => {
       'flutter-sm.png',
     ]) {
       assert.equal(
-        fs.existsSync(path.join(root, `public/mix-tailwinds/${slug}-${suffix}`)),
+        fs.existsSync(path.join(root, `public/mix-winds/${slug}-${suffix}`)),
         true,
         `missing capture: ${slug}-${suffix}`,
       )
@@ -133,7 +133,7 @@ test('serves a legible capture on narrow screens', () => {
 })
 
 test('keeps the seam operable by keyboard and screen readers', () => {
-  const seam = read('components/landing/mix-tailwinds/ComparisonSeam.tsx')
+  const seam = read('components/landing/mix-winds/ComparisonSeam.tsx')
 
   assert.match(seam, /type="range"/)
   assert.match(seam, /aria-labelledby=/)

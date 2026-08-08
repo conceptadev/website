@@ -29,6 +29,10 @@ export default withNextra({
             { source: '/documentation/widgets/:path*', destination: '/documentation/mix/widgets/:path*', permanent: true },
             { source: '/documentation/tutorials/:path*', destination: '/documentation/mix/tutorials/:path*', permanent: true },
             { source: '/documentation/ecosystem/:path*', destination: '/documentation/mix/ecosystem/:path*', permanent: true },
+            // The package was renamed from mix_tailwinds to mix_winds; keep the
+            // published landing and ecosystem URLs reachable.
+            { source: '/mix-tailwinds', destination: '/mix-winds', permanent: true },
+            { source: '/documentation/mix/ecosystem/mix-tailwinds', destination: '/documentation/mix/ecosystem/mix-winds', permanent: true },
         ]
     },
 })

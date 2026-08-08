@@ -1,9 +1,9 @@
-/* Content for the mix_tailwinds landing page.
+/* Content for the mix_winds landing page.
 
-   The captures under public/mix-tailwinds/ are produced by the package's own
+   The captures under public/mix-winds/ are produced by the package's own
    comparison suite: each example is rendered once in a real browser on
    Tailwind 4.3.1 and once in Flutter, from the same class string. Regenerate
-   them with `npm run compare:advanced` in packages/mix_tailwinds/tool/
+   them with `npm run compare:advanced` in packages/mix_winds/tool/
    visual-comparison and copy the per-example captures across. The suite keeps
    a 16px diagnostic margin around every capture; the landing crops that margin
    at presentation time while preserving the source evidence. */
@@ -19,7 +19,7 @@ export type Example = {
 
 /* Below this the desktop capture is too small to read, so the narrow capture —
    the same component laid out for a phone — is served instead. Matches the CSS
-   breakpoint in mix-tailwinds.css. */
+   breakpoint in mix-winds.css. */
 export const NARROW_CAPTURE_QUERY = "(max-width: 720px)";
 
 export const EXAMPLES: Example[] = [
@@ -82,7 +82,7 @@ export const DART_SNIPPET = `div('flex flex-col gap-4 rounded-3xl bg-slate-950 p
   ),
 ])`;
 
-export const INSTALL_SNIPPET = `flutter pub add mix_tailwinds`;
+export const INSTALL_SNIPPET = `flutter pub add mix_winds`;
 
 export const FEATURES = [
   {

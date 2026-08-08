@@ -1,27 +1,33 @@
 ---
-title: mix_tailwinds
+title: mix_winds
 description: "Use Tailwind-like utility class syntax to style Flutter widgets with Mix."
 ---
 
 import { Callout } from "nextra/components";
 
-# mix_tailwinds
+# mix_winds
 
-`mix_tailwinds` provides a Tailwind CSS-like utility syntax for styling Flutter widgets using Mix. Write class names such as `flex`, `gap-4`, and `text-lg` instead of composing stylers manually.
+`mix_winds` provides a Tailwind CSS-like utility syntax for styling Flutter widgets using Mix. Write class names such as `flex`, `gap-4`, and `text-lg` instead of composing stylers manually.
 
 <Callout type="warning">
   Treat this package as a proof of concept. The API is unstable and will change without notice.
 </Callout>
 
+<Callout type="info">
+  This package was published as `mix_tailwinds` through `0.0.1-alpha.1` and is now `mix_winds`.
+  To migrate, rename the dependency and replace `package:mix_tailwinds/mix_tailwinds.dart` imports
+  with `package:mix_winds/mix_winds.dart`. No public API symbol changed.
+</Callout>
+
 ## Interactive Preview
 
-<FlutterPreview previewId="ecosystem/mix-tailwinds.0" height={380} />
+<FlutterPreview previewId="ecosystem/mix-winds.0" height={380} />
 
 The card alert above demonstrates gradients, glassmorphism, badges, hover states, and nested flex layouts — all expressed through class name strings:
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:mix_tailwinds/mix_tailwinds.dart';
+import 'package:mix_winds/mix_winds.dart';
 
 class CardAlert extends StatelessWidget {
   const CardAlert({super.key});
@@ -110,8 +116,8 @@ class CardAlert extends StatelessWidget {
 
 The following resources point to the package registry and source code:
 
-- [Pub package](https://pub.dev/packages/mix_tailwinds)
-- [GitHub source](https://github.com/btwld/mix/tree/main/packages/mix_tailwinds)
+- [Pub package](https://pub.dev/packages/mix_winds)
+- [GitHub source](https://github.com/btwld/mix/tree/main/packages/mix_winds)
 
 ## Install
 
@@ -119,17 +125,17 @@ From pub.dev:
 
 ```yaml
 dependencies:
-  mix_tailwinds: 0.0.1-alpha.1
+  mix_winds: 0.1.0-alpha.0
 ```
 
 From the Git repository (latest unreleased changes):
 
 ```yaml
 dependencies:
-  mix_tailwinds:
+  mix_winds:
     git:
       url: https://github.com/btwld/mix.git
-      path: packages/mix_tailwinds
+      path: packages/mix_winds
 ```
 
 ## Quick start
@@ -138,7 +144,7 @@ Wrap your app with `TwScope`, then use `Div` and `Span` to build layouts with Ta
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:mix_tailwinds/mix_tailwinds.dart';
+import 'package:mix_winds/mix_winds.dart';
 
 void main() {
   runApp(
@@ -151,7 +157,7 @@ void main() {
                   'flex flex-col gap-4 p-6 bg-white rounded-xl shadow-md',
               children: [
                 Span(
-                  text: 'Hello mix_tailwinds',
+                  text: 'Hello mix_winds',
                   classNames: 'text-2xl font-bold text-gray-900',
                 ),
                 Span(
@@ -172,7 +178,7 @@ This renders a white rounded card with a title and subtitle, using only class na
 
 ## Widget API
 
-The following table lists all widgets provided by `mix_tailwinds`:
+The following table lists all widgets provided by `mix_winds`:
 
 | Widget | Purpose |
 |--------|---------|
@@ -368,7 +374,7 @@ Div(classNames: '-mt-4 -translate-x-8')
 ## Defaults and typography configuration
 
 <Callout type="info">
-  `mix_tailwinds` applies default typography through `TwScope` using Mix's token and text scope system.
+  `mix_winds` applies default typography through `TwScope` using Mix's token and text scope system.
   Prefer this over overriding `ThemeData.textTheme` when configuring default text styles.
 </Callout>
 
@@ -407,6 +413,6 @@ The following features are parsed but not applied or have incomplete support:
 ## Related docs
 
 - [Introduction](/documentation/mix/overview/introduction) — what Mix is and why it exists
-- [Styling](/documentation/mix/guides/styling) — the Styler pattern that `mix_tailwinds` builds on
+- [Styling](/documentation/mix/guides/styling) — the Styler pattern that `mix_winds` builds on
 - [Dynamic Styling](/documentation/mix/guides/dynamic-styling) — variants (hover, dark mode) used by tailwind prefixes
 - [Design Tokens](/documentation/mix/guides/design-token) — token system that powers `TwScope` configuration

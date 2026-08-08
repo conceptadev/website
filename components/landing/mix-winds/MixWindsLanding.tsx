@@ -17,11 +17,11 @@ import {
   INSTALL_SNIPPET,
 } from "./content";
 import "../landing.css";
-import "./mix-tailwinds.css";
+import "./mix-winds.css";
 
-const PUB_DEV_URL = "https://pub.dev/packages/mix_tailwinds";
+const PUB_DEV_URL = "https://pub.dev/packages/mix_winds";
 const GITHUB_URL =
-  "https://github.com/btwld/mix/tree/main/packages/mix_tailwinds";
+  "https://github.com/btwld/mix/tree/main/packages/mix_winds";
 
 const exampleTabId = (slug: string) => `mtw-example-tab-${slug}`;
 const examplePanelId = (slug: string) => `mtw-example-panel-${slug}`;
@@ -48,7 +48,7 @@ function CodePane({
   );
 }
 
-export function MixTailwindsLanding() {
+export function MixWindsLanding() {
   const [activeSlug, setActiveSlug] = useState(EXAMPLES[0].slug);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const active = EXAMPLES.find((e) => e.slug === activeSlug) ?? EXAMPLES[0];
@@ -95,7 +95,7 @@ export function MixTailwindsLanding() {
             variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
           >
             <motion.p className="mtw-eyebrow" variants={fadeUp} custom={0}>
-              mix_tailwinds
+              mix_winds
               <span className="mtw-eyebrow-badge">Alpha</span>
             </motion.p>
 
@@ -240,7 +240,7 @@ export function MixTailwindsLanding() {
           <motion.div className="mtw-close-inner" {...reveal}>
             <h2 className="mtw-close-title">Start with one class string.</h2>
             <p className="mtw-close-lead">
-              mix_tailwinds is an open-source alpha built on Mix. Add it to a
+              mix_winds is an open-source alpha built on Mix. Add it to a
               Flutter project and style your first widget the way you already
               think about layout.
             </p>
