@@ -12,7 +12,15 @@ dependencies:
   flutter:
     sdk: flutter
   mix: ^2.1.0
-  mix_winds: ^0.1.0-alpha.0
+  # mix_winds was renamed from mix_tailwinds and is not on pub.dev under the new
+  # name yet, so it is pinned to the rename commit on btwld/mix main. Revert to
+  # a hosted `mix_winds: ^0.1.0-alpha.0` once it is published. This package is
+  # publish_to: none, so the git pin only affects the docs preview build.
+  mix_winds:
+    git:
+      url: https://github.com/btwld/mix.git
+      path: packages/mix_winds
+      ref: e3133c3565e0c788b3f05f889ed75cb83f8acecb
   remix:
     git:
       url: https://github.com/btwld/remix.git
@@ -24,6 +32,18 @@ dev_dependencies:
     sdk: flutter
   dart_code_metrics_presets: ^2.24.0
   flutter_lints: ^6.0.0
+
+# mix_winds uses Mix APIs (onFocusVisible, Pressable.semanticsLabel) that exist
+# in the monorepo but not in any published mix release, and remix pins mix from
+# pub.dev, so the two sources cannot be reconciled by version solving alone.
+# Overriding mix onto the same commit keeps the whole preview build on one Mix.
+# Remove this once a mix prerelease ships those APIs.
+dependency_overrides:
+  mix:
+    git:
+      url: https://github.com/btwld/mix.git
+      path: packages/mix
+      ref: e3133c3565e0c788b3f05f889ed75cb83f8acecb
 
 flutter:
   uses-material-design: true
