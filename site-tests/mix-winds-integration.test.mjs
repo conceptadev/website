@@ -34,8 +34,12 @@ test('sells the package instead of reporting a pixel diff', () => {
   const seam = read('components/landing/mix-winds/ComparisonSeam.tsx')
 
   assert.match(landing, /Get started/)
+  assert.match(landing, /Install from GitHub/)
+  assert.doesNotMatch(landing, /Install from pub\.dev/)
   assert.match(landing, /flutter pub add|INSTALL_SNIPPET/)
-  assert.match(content, /flutter pub add mix_winds/)
+  assert.match(content, /flutter pub add .*mix_winds:\{git:/)
+  assert.doesNotMatch(content, /mix_winds@\{git:/)
+  assert.match(content, /path: packages\/mix_winds/)
 
   // No parity percentages, budgets, or pass/fail language on the page.
   const pageSource = [landing, content, seam].join('\n')
@@ -99,6 +103,38 @@ test('shows the functional API with real HTML and Dart highlighting', () => {
   assert.match(landing, /lang="dart"/)
   assert.match(highlighter, /"html"/)
   assert.match(highlighter, /"dart"/)
+})
+
+test('uses the functional API in the ecosystem guide and live preview', () => {
+  const guide = read('src/content/documentation/mix/ecosystem/mix-winds.mdx')
+  const preview = read('packages/mix_docs_preview/lib/ecosystem/mix_winds.dart')
+
+  for (const source of [guide, preview]) {
+    assert.match(source, /child: div\(/)
+    assert.match(source, /\bh3\(/)
+    assert.match(source, /\bp\(/)
+    assert.match(source, /\bbutton\(/)
+    assert.match(source, /onPressed: \(\) \{\}/)
+    assert.doesNotMatch(source, /child: Div\(/)
+    assert.doesNotMatch(source, /child: const Span\(/)
+  }
+
+  assert.match(guide, /## Functional API/)
+  assert.match(guide, /Use the uppercase constructors when you need/)
+  assert.match(guide, /onDiagnostic:/)
+  assert.doesNotMatch(guide, /onUnsupported:/)
+
+  // Basic usage needs no provider; the parity preview keeps TwScope for
+  // explicit Tailwind preflight typography.
+  assert.match(guide, /`TwScope` is optional/)
+  assert.match(guide, /otherwise uses `TwConfig\.standard\(\)`/)
+  assert.match(guide, /void main\(\) \{\s+runApp\(\s+MaterialApp\(/s)
+  assert.match(preview, /return TwScope\(/)
+
+  assert.match(guide, /mix_winds:\{git:/)
+  assert.doesNotMatch(guide, /mix_winds@\{git:/)
+  assert.match(guide, /placeholder package/)
+  assert.doesNotMatch(guide, /mix_winds:\s+\^?\d/)
 })
 
 test('serves a legible capture on narrow screens', () => {
