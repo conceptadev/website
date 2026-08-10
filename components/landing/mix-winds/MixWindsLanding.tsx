@@ -111,11 +111,11 @@ export function MixWindsLanding() {
             </motion.p>
 
             <motion.div className="mtw-cta-row" variants={fadeUp} custom={0.15}>
-              <LandingButton href={PUB_DEV_URL} arrow="right">
+              <LandingButton href={GITHUB_URL} arrow="right">
                 Get started
               </LandingButton>
-              <LandingButton href={GITHUB_URL} variant="secondary">
-                View on GitHub
+              <LandingButton href={PUB_DEV_URL} variant="secondary">
+                View on pub.dev
               </LandingButton>
             </motion.div>
 
@@ -245,11 +245,11 @@ export function MixWindsLanding() {
               think about layout.
             </p>
             <div className="mtw-cta-row">
-              <LandingButton href={PUB_DEV_URL} arrow="right">
-                Install from pub.dev
+              <LandingButton href={GITHUB_URL} arrow="right">
+                Install from GitHub
               </LandingButton>
-              <LandingButton href={GITHUB_URL} variant="secondary">
-                Read the source
+              <LandingButton href={PUB_DEV_URL} variant="secondary">
+                View on pub.dev
               </LandingButton>
             </div>
           </motion.div>

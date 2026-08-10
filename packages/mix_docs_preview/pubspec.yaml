@@ -12,10 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
   mix: ^2.1.0
-  # mix_winds was renamed from mix_tailwinds and is not on pub.dev under the new
-  # name yet, so it is pinned to the rename commit on btwld/mix main. Revert to
-  # a hosted `mix_winds: ^0.1.0-alpha.0` once it is published. This package is
-  # publish_to: none, so the git pin only affects the docs preview build.
+  # The mix_winds name on pub.dev still resolves to a placeholder package, so
+  # the preview is pinned to the rename commit. Switch to a compatible hosted
+  # release once one is published. This package is publish_to: none, so the git
+  # pin only affects the docs preview build.
   mix_winds:
     git:
       url: https://github.com/btwld/mix.git

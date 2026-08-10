@@ -23,7 +23,13 @@ import { Callout } from "nextra/components";
 
 <FlutterPreview previewId="ecosystem/mix-winds.0" height={380} />
 
-The card alert above demonstrates gradients, glassmorphism, badges, hover states, and nested flex layouts — all expressed through class name strings:
+<Callout type="info">
+  `TwScope` is optional. The preview uses it to match Tailwind Preflight's base typography across
+  the whole card. The utility helpers already fall back to `TwConfig.standard()` when no scope is
+  present, so ordinary `div`, `p`, and `button` calls do not require a wrapper.
+</Callout>
+
+The card alert above demonstrates gradients, glassmorphism, badges, hover states, and nested flex layouts. The lowercase helpers keep each class string beside its content, while `button` also provides native interaction and semantics:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -35,77 +41,55 @@ class CardAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TwScope(
-      child: Div(
-        classNames:
-            'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6',
-        child: Div(
-          classNames:
-              'bg-white/10 border border-white/20 rounded-3xl p-6 shadow-2xl',
-          child: Div(
-            classNames: 'flex items-start gap-4',
-            children: [
-              Div(
-                classNames:
-                    'w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center border-2 border-purple-400',
-                child: const Span(
-                  text: 'SM',
-                  classNames: 'text-white font-semibold text-lg',
+      child: div(
+        'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6',
+        [
+          div(
+            'bg-white/10 border border-white/20 rounded-3xl p-6 shadow-2xl',
+            [
+              div('flex items-start gap-4', [
+                div(
+                  'w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center border-2 border-purple-400',
+                  [span('text-white font-semibold text-lg', 'SM')],
                 ),
-              ),
-              Div(
-                classNames: 'flex-1 min-w-0',
-                children: [
-                  Div(
-                    classNames: 'flex items-center gap-2 mb-1',
-                    children: const [
-                      H3(
-                        text: 'Sarah Mitchell',
-                        classNames: 'text-white font-semibold text-lg truncate',
-                      ),
-                      Span(
-                        text: 'Admin',
-                        classNames:
-                            'px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs rounded-full font-medium',
-                      ),
-                    ],
-                  ),
-                  const P(
-                    text:
-                        'Your profile changes are ready to publish. Review and confirm to update your public information.',
-                    classNames: 'text-slate-300 text-sm mb-4',
-                  ),
-                  Div(
-                    classNames:
-                        'bg-white/5 rounded-xl p-3 mb-4 border border-white/10',
-                    child: Div(
-                      classNames:
-                          'flex items-center gap-2 text-amber-300 text-sm',
-                      children: const [
-                        Span(text: '\u26A0'),
-                        Span(text: 'This action cannot be undone'),
-                      ],
+                div('flex-1 min-w-0', [
+                  div('flex items-center gap-2 mb-1', [
+                    h3(
+                      'text-white font-semibold text-lg truncate',
+                      'Sarah Mitchell',
                     ),
+                    span(
+                      'px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs rounded-full font-medium',
+                      'Admin',
+                    ),
+                  ]),
+                  p(
+                    'text-slate-300 text-sm mb-4',
+                    'Your profile changes are ready to publish. Review and confirm to update your public information.',
                   ),
-                  Div(
-                    classNames: 'flex gap-3',
-                    children: [
-                      Div(
-                        classNames:
-                            'flex-1 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl font-medium border border-white/10 hover:border-white/20 flex items-center justify-center',
-                        child: const Span(text: 'Cancel'),
-                      ),
-                      Div(
-                        classNames:
-                            'flex-1 px-4 py-2.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white rounded-xl font-medium shadow-lg flex items-center justify-center',
-                        child: const Span(text: 'Save Changes'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                  div('bg-white/5 rounded-xl p-3 mb-4 border border-white/10', [
+                    div('flex items-center gap-2 text-amber-300 text-sm', [
+                      span('', '\u26A0'),
+                      span('', 'This action cannot be undone'),
+                    ]),
+                  ]),
+                  div('flex gap-3', [
+                    button(
+                      'flex flex-1 items-center justify-center rounded-xl border border-white/10 bg-white/10 px-4 py-2.5 font-medium text-white hover:border-white/20 hover:bg-white/20',
+                      [span('', 'Cancel')],
+                      onPressed: () {},
+                    ),
+                    button(
+                      'flex flex-1 items-center justify-center rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2.5 font-medium text-white shadow-lg hover:from-purple-400 hover:to-pink-400',
+                      [span('', 'Save Changes')],
+                      onPressed: () {},
+                    ),
+                  ]),
+                ]),
+              ]),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
@@ -121,14 +105,18 @@ The following resources point to the package registry and source code:
 
 ## Install
 
-From pub.dev:
+Install the current development version directly from the Mix repository. This follows the repository's default branch without hardcoding a release number:
 
-```yaml
-dependencies:
-  mix_winds: 0.1.0-alpha.0
+```bash
+flutter pub add "mix_winds:{git:{url: https://github.com/btwld/mix.git, path: packages/mix_winds}}"
 ```
 
-From the Git repository (latest unreleased changes):
+<Callout type="warning">
+  The `mix_winds` name on pub.dev currently resolves to a placeholder package. Until a functional
+  release is published there, do not use the shorter `flutter pub add mix_winds` command.
+</Callout>
+
+The equivalent `pubspec.yaml` entry is:
 
 ```yaml
 dependencies:
@@ -138,9 +126,11 @@ dependencies:
       path: packages/mix_winds
 ```
 
+For a reproducible application build, add a Git `ref` for a release tag or commit. Keep the unpinned form when the goal is always to follow the latest repository version.
+
 ## Quick start
 
-Wrap your app with `TwScope`, then use `Div` and `Span` to build layouts with Tailwind-like class names:
+Import the package and use the lowercase helpers directly. The standard utility configuration works without any root wrapper:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -148,24 +138,18 @@ import 'package:mix_winds/mix_winds.dart';
 
 void main() {
   runApp(
-    TwScope(
-      child: MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: Div(
-              classNames:
-                  'flex flex-col gap-4 p-6 bg-white rounded-xl shadow-md',
-              children: [
-                Span(
-                  text: 'Hello mix_winds',
-                  classNames: 'text-2xl font-bold text-gray-900',
-                ),
-                Span(
-                  text: 'Utility-first styling powered by Mix.',
-                  classNames: 'text-sm text-gray-600',
-                ),
-              ],
-            ),
+    MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: div(
+            'flex flex-col gap-4 rounded-xl bg-white p-6 shadow-md',
+            [
+              h2('text-2xl font-bold text-gray-900', 'Hello mix_winds'),
+              p(
+                'text-sm text-gray-600',
+                'Utility-first styling powered by Mix.',
+              ),
+            ],
           ),
         ),
       ),
@@ -176,25 +160,30 @@ void main() {
 
 This renders a white rounded card with a title and subtitle, using only class name strings.
 
-## Widget API
+## Functional API
 
-The following table lists all widgets provided by `mix_winds`:
+The class-first helpers are the cleanest API for most layouts. Every helper requires a class string; pass `''` when an element has no utilities.
 
-| Widget | Purpose |
+Each helper resolves the nearest `TwConfig` and otherwise uses `TwConfig.standard()`. Add `TwScope` only when the subtree needs Tailwind-compatible base typography, a custom configuration, extra Mix tokens, or custom modifier ordering.
+
+| Helper | Purpose |
 |--------|---------|
-| `TwScope` | Root wrapper. Provides `TwConfig` (scales, colors, breakpoints) and default typography to the widget tree. |
-| `Div` | Container and layout element. Auto-detects whether to render as a flex container or a box based on class names. |
-| `Span` | Inline text element. |
-| `P` | Block-level paragraph element. |
-| `H1` – `H6` | Heading elements. No default styles applied (matches Tailwind Preflight behavior). |
-| `TruncatedP` | Convenience wrapper for text truncation in flex containers. Auto-applies `flex-1 min-w-0`. |
+| `div(classes, [children])` | Container and layout element. Returns a `Div`. |
+| `p(classes, text)` | Block-level paragraph. Returns a `P`. |
+| `span(classes, text)` | Inline text. Returns a `Span`. |
+| `h1` – `h6(classes, text)` | Semantic headings with no default visual styles, matching Tailwind Preflight. |
+| `button(classes, children, onPressed: ...)` | Native button interaction, states, and semantics. Returns a `Button`. |
+| `twIcon(classes, icon)` | Icon styled with utility classes. Returns a `TwIcon`. |
+| `truncatedP(classes, text)` | Truncated paragraph that applies `flex-1 min-w-0`. Returns a `TruncatedP`. |
 
-All layout widgets accept a `classNames` string and an optional `onUnsupported` callback for unrecognized tokens:
+Use the uppercase constructors when you need a const widget, key, custom configuration, diagnostics, a single `child`, or advanced button and focus options:
 
 ```dart
 Div(
   classNames: 'flex gap-4 unknown-class',
-  onUnsupported: (token) => debugPrint('Unsupported: $token'),
+  onDiagnostic: (diagnostic) {
+    debugPrint('${diagnostic.code}: ${diagnostic.token}');
+  },
   children: [...],
 )
 ```
@@ -300,7 +289,7 @@ Prefix any utility with a variant to apply it conditionally.
 | `2xl:` | 1536px |
 
 ```dart
-Div(classNames: 'flex flex-col md:flex-row gap-4', children: [...])
+div('flex flex-col gap-4 md:flex-row', [...])
 ```
 
 ### Interaction states
@@ -315,10 +304,10 @@ Div(classNames: 'flex flex-col md:flex-row gap-4', children: [...])
 | `group-hover:` | Parent group is hovered |
 
 ```dart
-Div(
-  classNames:
-      'bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-4 py-2 rounded-lg',
-  child: Span(text: 'Click me'),
+button(
+  'rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 active:bg-blue-800',
+  [span('', 'Click me')],
+  onPressed: () {},
 )
 ```
 
@@ -334,7 +323,7 @@ Div(
 Combine multiple variant prefixes on a single token:
 
 ```dart
-Div(classNames: 'bg-white md:hover:bg-blue-500 dark:bg-gray-900')
+div('bg-white md:hover:bg-blue-500 dark:bg-gray-900')
 ```
 
 ## Special syntax
@@ -344,7 +333,7 @@ Div(classNames: 'bg-white md:hover:bg-blue-500 dark:bg-gray-900')
 Use square brackets for values outside the default scale:
 
 ```dart
-Div(classNames: 'bg-[#FF0000] p-[24px] w-[100px]')
+div('bg-[#FF0000] p-[24px] w-[100px]')
 ```
 
 ### Opacity modifiers
@@ -352,7 +341,7 @@ Div(classNames: 'bg-[#FF0000] p-[24px] w-[100px]')
 Append `/<opacity>` (0–100) to any color utility:
 
 ```dart
-Div(classNames: 'bg-white/50 text-black/75')
+div('bg-white/50 text-black/75')
 ```
 
 ### Important flag
@@ -360,7 +349,7 @@ Div(classNames: 'bg-white/50 text-black/75')
 Prefix with `!` to mark a utility as important (overrides other values during merge):
 
 ```dart
-Div(classNames: '!font-bold')
+div('!font-bold')
 ```
 
 ### Negative values
@@ -368,17 +357,26 @@ Div(classNames: '!font-bold')
 Prefix with `-` for margin and transform utilities:
 
 ```dart
-Div(classNames: '-mt-4 -translate-x-8')
+div('-mt-4 -translate-x-8')
 ```
 
 ## Defaults and typography configuration
 
 <Callout type="info">
-  `mix_winds` applies default typography through `TwScope` using Mix's token and text scope system.
-  Prefer this over overriding `ThemeData.textTheme` when configuring default text styles.
+  `TwScope` is configuration, not a prerequisite for utility parsing. Use it when you want
+  `mix_winds` to own the subtree's base typography instead of inheriting Flutter's surrounding
+  `DefaultTextStyle`.
 </Callout>
 
-`TwScope` injects a base text style into the widget tree so all text inherits consistent defaults. Configure typography through `TwTextDefaults`:
+`TwScope` performs three jobs:
+
+1. It provides one `TwConfig` to every descendant. Without it, each helper uses `TwConfig.standard()`.
+2. It installs a `MixScope` for the preflight text token, optional Mix tokens, and modifier ordering.
+3. It applies `TwTextDefaults` through `TextScope`, giving unqualified text a consistent font family, base size, weight, tracking, and line height.
+
+In the card preview, the third job matters: labels such as `Cancel` intentionally omit a `text-*` size and inherit Tailwind's 16px base typography. Without `TwScope`, the utility classes still work, but those unspecified text properties come from the surrounding Flutter app and the visual result can differ.
+
+Configure typography through `TwTextDefaults`:
 
 ```dart
 TwScope(

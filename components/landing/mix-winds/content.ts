@@ -82,7 +82,7 @@ export const DART_SNIPPET = `div('flex flex-col gap-4 rounded-3xl bg-slate-950 p
   ),
 ])`;
 
-export const INSTALL_SNIPPET = `flutter pub add mix_winds`;
+export const INSTALL_SNIPPET = `flutter pub add "mix_winds:{git:{url: https://github.com/btwld/mix.git, path: packages/mix_winds}}"`;
 
 export const FEATURES = [
   {
