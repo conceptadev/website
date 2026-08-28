@@ -1,7 +1,7 @@
 
 const meta = {
   codecs: 'Codecs',
-  'typesafe-schemas': 'TypeSafe Schemas',
+  'typesafe-schemas': 'Model Code Generation',
   'json-schema-integration': 'JSON Schema Integration',
   configuration: 'Configuration',
   'adapter-authors': {

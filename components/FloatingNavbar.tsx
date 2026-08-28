@@ -296,7 +296,7 @@ const DOCS_SECTIONS: Partial<Record<ProductId, DocsEntry[]>> = {
             label: 'Advanced',
             pages: [
                 { label: 'Codecs', href: '/documentation/ack/advanced/codecs' },
-                { label: 'TypeSafe Schemas', href: '/documentation/ack/advanced/typesafe-schemas' },
+                { label: 'Model Code Generation', href: '/documentation/ack/advanced/typesafe-schemas' },
                 { label: 'JSON Schema Integration', href: '/documentation/ack/advanced/json-schema-integration' },
                 { label: 'Configuration', href: '/documentation/ack/advanced/configuration' },
                 { label: 'Adapter Package Quickstart', href: '/documentation/ack/advanced/schema-converter-quickstart' },

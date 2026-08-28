@@ -31,7 +31,7 @@ if (result.isOk) {
 }
 ```
 
-On success, `getOrThrow()` returns your **validated data** as a `Map<String, Object?>`. Ack checks and shapes the data — opt into [code generation](/documentation/ack/advanced/typesafe-schemas) when you'd rather have typed getters than map access.
+On success, `getOrThrow()` returns your **validated data** as a `Map<String, Object?>`. Ack checks and shapes the data — opt into [model code generation](/documentation/ack/advanced/typesafe-schemas) when you'd rather have typed fields than map access or want a schema generated from an existing class.
 
 ## Why Ack?
 
@@ -60,13 +60,13 @@ On success, `getOrThrow()` returns your **validated data** as a `Map<String, Obj
     href="/documentation/ack/advanced/typesafe-schemas"
     className="group rounded-2xl border border-white/10 bg-white/[0.035] p-6 transition-colors hover:border-[#6e8bff]/50 hover:bg-[#315cff]/[0.07]"
   >
-    <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#6e8bff]">Code generation</span>
-    <h3 className="mt-3 text-lg font-semibold tracking-tight text-white">Keep the schema. Add a typed API.</h3>
+    <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#6e8bff]">Model code generation</span>
+    <h3 className="mt-3 text-lg font-semibold tracking-tight text-white">Start from the contract you own.</h3>
     <div className="mt-2 text-sm leading-6 text-[#9aa8c7]">
-      Add @AckType() to the schema you already trust and generate lightweight wrappers with typed getters, parse helpers, and no duplicated model.
+      Use @AckInfer() to generate an immutable model from a schema, or @AckModel() to derive a validated schema and JSON helpers from your class.
     </div>
-    <code className="mt-5 inline-block !border-white/10 !bg-black/20 text-[#72e1ff]">UserType.parse(json)</code>
-    <span className="mt-5 block text-sm font-medium text-[#b8c5e3] transition-colors group-hover:text-[#62d8ff]">Generate typed schemas →</span>
+    <code className="mt-5 inline-block !border-white/10 !bg-black/20 text-[#72e1ff]">@AckInfer() → User · @AckModel() → UserSchema</code>
+    <span className="mt-5 block text-sm font-medium text-[#b8c5e3] transition-colors group-hover:text-[#62d8ff]">Explore model generation →</span>
   </a>
 </div>
 
@@ -77,7 +77,7 @@ On success, `getOrThrow()` returns your **validated data** as a `Map<String, Obj
 - **Make a field optional or nullable** — [Optional vs nullable](/documentation/ack/essentials/schemas#optional-vs-nullable)
 - **Parse dates, URIs, and durations** — [Codecs](/documentation/ack/advanced/codecs)
 - **Add custom validation logic** — [Custom Validation](/documentation/ack/how-to-guides/custom-validation)
-- **Generate typed models (no manual casts)** — [TypeSafe Schemas](/documentation/ack/advanced/typesafe-schemas)
+- **Generate models or schemas** — [Model Code Generation](/documentation/ack/advanced/typesafe-schemas)
 - **Reuse and compose schemas** — [Common Recipes](/documentation/ack/how-to-guides/common-recipes)
 
 ## Install

@@ -106,7 +106,7 @@ test('resolves every Ack documentation and landing-page link', () => {
   assert.deepEqual(failures, [])
 })
 
-test('features codecs and code generation on Ack entry pages', () => {
+test('features codecs and two-way model generation on Ack entry pages', () => {
   const landing = readFileSync(ackLanding, 'utf8')
   const overview = readFileSync(
     join(ackContentRoot, 'getting-started/overview.mdx'),
@@ -115,10 +115,42 @@ test('features codecs and code generation on Ack entry pages', () => {
 
   for (const source of [landing, overview]) {
     assert.match(source, /Codecs|CODECS/)
-    assert.match(source, /Code generation|CODE GENERATION/)
+    assert.match(source, /Model code generation|MODEL GENERATION/)
+    assert.match(source, /@AckInfer/)
+    assert.match(source, /@AckModel/)
+    assert.doesNotMatch(source, /@AckType|UserType/)
     assert.match(source, /\/documentation\/ack\/advanced\/codecs/)
     assert.match(source, /\/documentation\/ack\/advanced\/typesafe-schemas/)
   }
+})
+
+test('keeps Ack 1.2 setup and generated-part guidance current', () => {
+  const installation = readFileSync(
+    join(ackContentRoot, 'getting-started/installation.mdx'),
+    'utf8',
+  )
+  const generation = readFileSync(
+    join(ackContentRoot, 'advanced/typesafe-schemas.mdx'),
+    'utf8',
+  )
+  const llms = readFileSync(join(root, 'public/ack/llms.txt'), 'utf8')
+  const ackSurface = [
+    readFileSync(ackLanding, 'utf8'),
+    ...walk(ackContentRoot).map((path) => readFileSync(path, 'utf8')),
+  ].join('\n')
+
+  assert.match(installation, /ack: \^1\.2\.0/)
+  assert.match(installation, /ack_annotations: \^1\.2\.0/)
+  assert.match(installation, /ack_generator: \^1\.2\.0/)
+  for (const source of [installation, generation, llms]) {
+    assert.match(source, /part '[-_a-z]+\.ack\.dart';/)
+    assert.match(source, /part '[-_a-z]+\.ack\.g\.dart';/)
+    assert.match(source, /@AckInfer/)
+    assert.match(source, /@AckModel/)
+  }
+  assert.doesNotMatch(ackSurface, /github\.com\/btwld\/ack/)
+  assert.doesNotMatch(ackSurface, /@AckType|UserType/)
+  assert.match(llms, /Rename `@AckType\(\)` to `@AckInfer\(\)`/)
 })
 
 test('showcases a User codec round trip across the Ack landing page', () => {
