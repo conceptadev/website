@@ -47,7 +47,7 @@ Schema output as their source of truth for non-JSON formats.
 
 ### Package Naming Convention
 
-```text
+```
 ack_<target_system>
 ```
 
@@ -65,7 +65,7 @@ ack_<target_system>
 
 ### Directory Layout
 
-```text
+```
 packages/ack_<target>/
 ├── lib/
 │   ├── ack_<target>.dart           # Main library file (public API)
@@ -135,16 +135,16 @@ touch .pubignore
 name: ack_<target>
 description: <Target System> schema converter for Ack validation library
 version: 1.0.0-beta.1
-repository: https://github.com/btwld/ack
-issue_tracker: https://github.com/btwld/ack/issues
+repository: https://github.com/conceptadev/ack
+issue_tracker: https://github.com/conceptadev/ack/issues
 
 environment:
-  sdk: '>=3.8.0 <4.0.0'
+  sdk: '>=3.9.0 <4.0.0'
   # Add flutter if target SDK requires it
   # flutter: '>=3.16.0'
 
 dependencies:
-  ack: ^1.0.0
+  ack: ^1.2.0
   # Add target SDK dependency if needed
   # <target_sdk>: ^x.y.z
   meta: ^1.15.0
@@ -177,7 +177,7 @@ analyzer:
 
 #### 1.4 Configure .pubignore
 
-```text
+```
 # Development and IDE files
 .claude/
 .idea/
@@ -1023,14 +1023,14 @@ Converts Ack schemas to <Target> format for [use case]. Assumes familiarity with
 
 \`\`\`yaml
 dependencies:
-  ack: ^1.0.0
+  ack: ^1.2.0
   ack_<target>: ^1.0.0
   <target_sdk>: ^x.y.z  # Required peer dependency
 \`\`\`
 
 ### Compatibility
 
-Requires `<target_sdk>: >=x.y.z <n.0.0` as a peer dependency. Report [compatibility issues](https://github.com/btwld/ack/issues).
+Requires `<target_sdk>: >=x.y.z <n.0.0` as a peer dependency. Report [compatibility issues](https://github.com/conceptadev/ack/issues).
 
 ## Limitations ⚠️
 
@@ -1122,11 +1122,11 @@ dart test  # or flutter test if using Flutter
 
 ## Contributing
 
-For contribution guidelines, see the [CONTRIBUTING.md](https://github.com/btwld/ack/blob/main/CONTRIBUTING.md) in the root repository.
+For contribution guidelines, see the [CONTRIBUTING.md](https://github.com/conceptadev/ack/blob/main/CONTRIBUTING.md) in the root repository.
 
 ## License
 
-This package is part of the [Ack](https://github.com/btwld/ack) monorepo.
+This package is part of the [Ack](https://github.com/conceptadev/ack) monorepo.
 
 ## Related Packages
 
@@ -1163,7 +1163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Limitations
 - [List known limitations]
 
-[1.0.0-beta.1]: https://github.com/btwld/ack/releases/tag/ack_<target>-v1.0.0-beta.1
+[1.0.0-beta.1]: https://github.com/conceptadev/ack/releases/tag/ack_<target>-v1.0.0-beta.1
 ```
 
 ---
@@ -1515,6 +1515,6 @@ class GraphQlSchemaConverter {
 - Document limitations as you discover them
 
 **For help**:
-- Create GitHub issue: https://github.com/btwld/ack/issues
+- Create GitHub issue: https://github.com/conceptadev/ack/issues
 - Reference this guide
 - Ask specific questions about target system

@@ -31,7 +31,7 @@ export function AckHome() {
             <Link className="ack-button ack-button-primary" href="/documentation/ack/getting-started/quickstart-tutorial">
               Start validating <span aria-hidden="true">→</span>
             </Link>
-            <a className="ack-button ack-button-secondary" href="https://github.com/btwld/ack">
+            <a className="ack-button ack-button-secondary" href="https://github.com/conceptadev/ack">
               View on GitHub
             </a>
           </div>
@@ -190,14 +190,14 @@ export function AckHome() {
 
           <article className="ack-feature-card ack-feature-types">
             <div className="ack-feature-copy">
-              <span className="ack-feature-index">TYPE-SAFE CODE GENERATION</span>
-              <h3>Generate types, not duplicate models.</h3>
-              <p>Annotate the schema you already trust. Ack generates a lightweight wrapper with typed getters and parse helpers—without changing the runtime schema.</p>
-              <Link href="/documentation/ack/advanced/typesafe-schemas">Generate typed schemas <span aria-hidden="true">→</span></Link>
+              <span className="ack-feature-index">TWO-WAY MODEL GENERATION</span>
+              <h3>Own the schema—or the class.</h3>
+              <p>Use <code>@AckInfer()</code> to generate an immutable model from a schema, or <code>@AckModel()</code> to derive a validated schema and JSON helpers from your class.</p>
+              <Link href="/documentation/ack/advanced/typesafe-schemas">Generate models and schemas <span aria-hidden="true">→</span></Link>
             </div>
             <div className="ack-mini-code">
               <span className="ack-sample-label">user_schema.dart · optional generator</span>
-              <pre tabIndex={0} aria-label="Generate typed accessors"><code><span className="tok-annotation">@AckType</span>(){`\n`}<span className="tok-keyword">final</span> userSchema = <span className="tok-type">Ack</span>.<span className="tok-call">object</span>(...);{`\n\n`}<span className="tok-keyword">final</span> ada = UserType.<span className="tok-call">parse</span>(json);{`\n`}print(ada.email); <span className="tok-comment">// String</span></code></pre>
+              <pre tabIndex={0} aria-label="Generate a model from a schema or a schema from a model"><code><span className="tok-annotation">@AckInfer</span>(){`\n`}<span className="tok-keyword">final</span> userSchema ={`\n`}  <span className="tok-type">Ack</span>.<span className="tok-call">object</span>(...);{`\n`}<span className="tok-comment">// → User</span>{`\n\n`}<span className="tok-annotation">@AckModel</span>(){`\n`}<span className="tok-keyword">final class</span> Account{`\n`}    <span className="tok-keyword">with</span> _$AccountAck {'{'} ... {'}'}{`\n`}<span className="tok-comment">// → AccountSchema</span></code></pre>
             </div>
           </article>
 
