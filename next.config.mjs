@@ -14,6 +14,18 @@ const withNextra = nextra({
 export default withNextra({
     async redirects() {
         return [
+            {
+                source: '/',
+                has: [{ type: 'host', value: 'fluttermix.com' }],
+                destination: '/mix',
+                permanent: false,
+            },
+            {
+                source: '/',
+                has: [{ type: 'host', value: 'www.fluttermix.com' }],
+                destination: '/mix',
+                permanent: false,
+            },
             { source: '/docs', destination: '/documentation', permanent: true },
             { source: '/docs/:path*', destination: '/documentation/:path*', permanent: true },
             { source: '/naked_ui', destination: '/naked-ui', permanent: true },

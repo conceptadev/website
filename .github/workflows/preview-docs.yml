@@ -8,6 +8,10 @@ on:
       - 'src/**'
       - 'public/**'
       - 'scripts/**'
+      - 'site-tests/**'
+      - 'next.config.mjs'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - '.github/workflows/preview-docs.yml'
   push:
     branches: [main]
@@ -16,6 +20,10 @@ on:
       - 'src/**'
       - 'public/**'
       - 'scripts/**'
+      - 'site-tests/**'
+      - 'next.config.mjs'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - '.github/workflows/preview-docs.yml'
 
 concurrency:
@@ -59,6 +67,9 @@ jobs:
 
       - name: Install Website Dependencies
         run: pnpm install
+
+      - name: Run Site Tests
+        run: pnpm run test:site
 
       - name: Validate Preview Manifest
         run: pnpm run check:previews
