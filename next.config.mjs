@@ -17,13 +17,13 @@ export default withNextra({
             {
                 source: '/',
                 has: [{ type: 'host', value: 'fluttermix.com' }],
-                destination: '/mix',
+                destination: 'https://concepta.dev/mix',
                 permanent: false,
             },
             {
                 source: '/',
                 has: [{ type: 'host', value: 'www.fluttermix.com' }],
-                destination: '/mix',
+                destination: 'https://concepta.dev/mix',
                 permanent: false,
             },
             { source: '/docs', destination: '/documentation', permanent: true },

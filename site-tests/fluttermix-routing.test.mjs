@@ -3,23 +3,24 @@ import test from 'node:test'
 
 import nextConfig from '../next.config.mjs'
 
-test('FlutterMix roots temporarily redirect to the existing Mix landing page', async () => {
+test('FlutterMix roots temporarily redirect to the canonical Concepta Mix page', async () => {
     const redirects = await nextConfig.redirects()
     const rootRedirects = redirects.filter(
-        ({ source, destination }) => source === '/' && destination === '/mix',
+        ({ source, destination }) =>
+            source === '/' && destination === 'https://concepta.dev/mix',
     )
 
     assert.deepEqual(rootRedirects, [
         {
             source: '/',
             has: [{ type: 'host', value: 'fluttermix.com' }],
-            destination: '/mix',
+            destination: 'https://concepta.dev/mix',
             permanent: false,
         },
         {
             source: '/',
             has: [{ type: 'host', value: 'www.fluttermix.com' }],
-            destination: '/mix',
+            destination: 'https://concepta.dev/mix',
             permanent: false,
         },
     ])
